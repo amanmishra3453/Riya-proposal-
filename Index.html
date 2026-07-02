@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Meri Pyari Baby ❤️</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ff69b4, #db2777, #c026d3);
+      color: white;
+      text-align: center;
+      min-height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .container {
+      position: relative;
+      z-index: 10;
+      padding: 40px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      text-shadow: 0 0 25px rgba(255,255,255,0.7);
+    }
+    
+    h2 {
+      font-size: 2.3rem;
+      margin-bottom: 10px;
+      font-style: italic;
+    }
+    
+    .nickname {
+      font-size: 1.7rem;
+      margin: 15px 0 25px;
+      color: #ffe4e1;
+      text-shadow: 0 0 20px rgba(255, 182, 193, 0.9);
+    }
+    
+    p.sender {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.95;
+    }
+    
+    button {
+      font-size: 1.7rem;
+      padding: 18px 50px;
+      margin: 15px;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    
+    #yesBtn {
+      background: #ff1493;
+      color: white;
+      box-shadow: 0 10px 35px rgba(255, 20, 147, 0.5);
+    }
+    
+    #yesBtn:hover {
+      transform: scale(1.1);
+      background: #ff69b4;
+    }
+    
+    #noBtn {
+      background: #ffffff;
+      color: #333;
+    }
+    
+    .success {
+      display: none;
+    }
+    
+    .hearts {
+      position: absolute;
+      font-size: 2.8rem;
+      animation: float 5s linear infinite;
+      z-index: 5;
+    }
+    
+    @keyframes float {
+      0% { transform: translateY(120vh) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+    }
+    
+    img {
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+      max-width: 90%;
+      margin: 30px auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Proposal Screen -->
+  <div class="container" id="proposal">
+    <h1>Will you be my girlfriend?</h1>
+    <h2>Riya ❤️</h2>
+    <div class="nickname">Meri pyari si cute si choti si baby</div>
+    <p class="sender">From: Joydeep</p>
+    
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 😢</button>
+  </div>
+
+  <!-- Success Screen -->
+  <div class="container success" id="success">
+    <h1>Yay! I knew you'd say YES! 💖</h1>
+    <p style="font-size:1.4rem; margin:25px 0;">
+      Meri pyari si cute si choti si baby,<br>
+      You're the most amazing person I know.<br>
+      I love you endlessly.
+    </p>
+    
+    <!-- Replace this with your real photo link -->
+    <img src="https://via.placeholder.com/500x350/ff69b4/ffffff?text=Riya+&+Joydeep" alt="Riya & Joydeep">
+    
+    <p style="margin-top:30px; font-size:1.4rem;">\~ Joydeep ❤️</p>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const proposalScreen = document.getElementById('proposal');
+    const successScreen = document.getElementById('success');
+
+    let noClicks = 0;
+    const funnyMessages = [
+      "Try again... it's not gonna bite 😏",
+      "Bro the No button is literally scared of you 😂",
+      "Okay but what if you just... said yes? 👀",
+      "Your heart said yes, your finger just slipped? 💕",
+      "The audacity... but okay... try again bestie",
+      "NOPE in this economy?? 💸",
+      "Come on, just say yes na meri baby ❤️",
+      "Meri pyari baby, please? 🥺"
+    ];
+
+    // No Button Logic
+    noBtn.addEventListener('click', () => {
+      noClicks++;
+      
+      // Change text
+      noBtn.textContent = funnyMessages[noClicks % funnyMessages.length];
+      
+      // Move button randomly
+      const x = Math.random() * 380 - 190;
+      const y = Math.random() * 220 - 110;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      
+      // Grow Yes button
+      const scale = Math.min(1 + noClicks * 0.18, 2.6);
+      yesBtn.style.transform = `scale(${scale})`;
+    });
+
+    // Yes Button Logic
+    yesBtn.addEventListener('click', () => {
+      proposalScreen.style.display = 'none';
+      successScreen.style.display = 'block';
+      createFloatingHearts();
+    });
+
+    // Floating Hearts Animation
+    function createFloatingHearts() {
+      for (let i = 0; i < 80; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'hearts';
+          heart.textContent = ['❤️', '💖', '💗', '💘'][Math.floor(Math.random() * 4)];
+          heart.style.left = Math.random() * 100 + 'vw';
+          heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+          document.body.appendChild(heart);
+          
+          setTimeout(() => heart.remove(), 12000);
+        }, i * 60);
+      }
+    }
+  </script>
+</body>
+</html>
